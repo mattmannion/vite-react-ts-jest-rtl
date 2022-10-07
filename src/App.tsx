@@ -1,32 +1,29 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+
+enum Tabs {
+  a = 'a',
+  b = 'b',
+}
+
+function ShowTab(tab: Tabs) {
+  switch (tab) {
+    case Tabs.a:
+      return <div>a</div>;
+    case Tabs.b:
+      return <div>b</div>;
+  }
+}
 
 export function App() {
-  const [count, setCount] = useState(0);
+  const [tab, setTab] = useState<Tabs>(Tabs.a);
 
   return (
     <div className='App'>
-      <div data-testid='testing'></div>
       <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src='/vite.svg' className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://reactjs.org' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
+        <button onClick={() => setTab(Tabs.a)}>a</button>
+        <button onClick={() => setTab(Tabs.b)}>b</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
+      {ShowTab(tab)}
     </div>
   );
 }

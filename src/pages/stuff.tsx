@@ -5,11 +5,20 @@ export function Stuff() {
   return (
     <>
       <div>stuff</div>
-      {data.map((slug) => (
-        <Link key={slug.title} to={`/stuff/${slug.title}`}>
-          {slug.title}
-        </Link>
-      ))}
+      <div
+        style={{
+          display: 'flex',
+          flexFlow: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {data.map((slug) => (
+          <Link key={slug.title} to={`/stuff/${slug.title}`}>
+            {slug.title}
+          </Link>
+        ))}
+      </div>
     </>
   );
 }

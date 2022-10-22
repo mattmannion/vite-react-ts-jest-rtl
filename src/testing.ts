@@ -1,9 +1,18 @@
+// set up testing
+import '@testing-library/jest-dom';
+import matchers from '@testing-library/jest-dom';
+import { expect } from 'vitest';
+
+expect.extend(matchers);
+
+// testing util
 import type { ReactElement, JSXElementConstructor } from 'react';
 import { render } from '@testing-library/react';
+
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';
 
-const customRender = (
+export const custom_render = (
   ui: ReactElement<any, string | JSXElementConstructor<any>>,
   options = {}
 ) =>
@@ -12,6 +21,3 @@ const customRender = (
     wrapper: ({ children }) => children,
     ...options,
   });
-
-// override render export
-export { customRender as render };

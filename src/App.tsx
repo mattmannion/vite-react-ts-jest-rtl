@@ -1,56 +1,33 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faAddressCard,
-  faCircle,
-  faSun,
-} from '@fortawesome/free-regular-svg-icons';
-import { useState } from 'react';
-import {
-  faAtom,
-  faCircleArrowDown,
-  faCircleNodes,
-  faCircleNotch,
-  faRotate,
-  faSpinner,
-} from '@fortawesome/free-solid-svg-icons';
-
-enum Tabs {
-  a = 'a',
-  b = 'b',
-}
-
-function ShowTab(tab: Tabs) {
-  switch (tab) {
-    case Tabs.a:
-      return <div>a</div>;
-    case Tabs.b:
-      return <div>b</div>;
-  }
-}
+import data from 'src/data/data.json';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Home } from 'src/pages/home';
+import { NotFound } from 'src/pages/nf';
+import { Stuff } from 'src/pages/stuff';
+import { StuffSlug } from 'src/pages/stuff-slug';
 
 export function App() {
-  const [tab, setTab] = useState<Tabs>(Tabs.a);
-
   return (
     <div className='App'>
-      <div>
-        <FontAwesomeIcon
-          icon={faAddressCard}
-          size={'2x'}
-          style={{ color: 'black' }}
-        />
-        <FontAwesomeIcon
-          icon={faSun}
-          size={'2x'}
-          className='spin'
-          style={{ color: 'black' }}
-        />
-      </div>
-      <div>
-        <button onClick={() => setTab(Tabs.a)}>a</button>
-        <button onClick={() => setTab(Tabs.b)}>b</button>
-      </div>
-      {ShowTab(tab)}
+      <BrowserRouter>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+          <Link to='/'>home</Link>
+          <Link to='/stuff'>stuff</Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/stuff'>
+            <Route index element={<Stuff />} />
+            {data.map((data) => (
+              <Route
+                key={data.title}
+                path={data.title}
+                element={<StuffSlug {...data} />}
+              />
+            ))}
+          </Route>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

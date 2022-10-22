@@ -1,9 +1,9 @@
-import { App } from 'src/App';
 import { render, screen } from '@testing-library/react';
+import { AppRouter } from 'src/router/Router';
 
 describe('testing 12', () => {
   beforeEach(() => {
-    render(<App />);
+    render(<AppRouter />);
   });
 
   it('hello gamers', async () => {

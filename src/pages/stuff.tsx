@@ -6,7 +6,9 @@ export function Stuff() {
     <>
       <div>stuff</div>
       {data.map((slug) => (
-        <Link to={`/stuff/${slug.title}`}>{slug.title}</Link>
+        <Link key={slug.title} to={`/stuff/${slug.title}`}>
+          {slug.title}
+        </Link>
       ))}
     </>
   );

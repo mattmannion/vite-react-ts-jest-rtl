@@ -21,7 +21,7 @@
     },
     "types": ["node", "vite/client", "vitest/globals"]
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
